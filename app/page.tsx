@@ -19,6 +19,7 @@ const instagramUrl =
 const navigation = [
   { label: "Como funciona", href: "#como-funciona" },
   { label: "Soluções", href: "#solucoes" },
+  { label: "Avulsos", href: "#avulsos" },
   { label: "Planos", href: "#planos" },
   { label: "Perguntas", href: "#perguntas" },
 ];
@@ -240,6 +241,104 @@ const plans = [
       "Reuniões estratégicas",
     ],
     media: "Verba de mídia e produções extras podem variar por escopo.",
+  },
+];
+
+const oneOffServices = [
+  {
+    title: "Diagnóstico Estratégico",
+    price: "R$ 790",
+    description:
+      "Para entender os gargalos de marketing, posicionamento, funil comercial e atendimento antes de investir em novas ações.",
+    includes: [
+      "Auditoria de presença digital",
+      "Análise das redes sociais",
+      "Avaliação do posicionamento",
+      "Diagnóstico do funil comercial",
+      "Plano de ação personalizado",
+    ],
+  },
+  {
+    title: "Gestão de Redes Sociais",
+    price: "R$ 1.300/mês",
+    description:
+      "Para manter presença digital com planejamento, conteúdo e relatório sem contratar um plano mais completo.",
+    includes: [
+      "Planejamento mensal",
+      "8 posts",
+      "4 Reels",
+      "Stories",
+      "Design profissional",
+      "Relatório de desempenho",
+    ],
+  },
+  {
+    title: "Gestão de Tráfego Pago",
+    price: "R$ 900/mês",
+    note: "Sem verba de mídia",
+    description:
+      "Para estruturar campanhas Meta Ads com segmentação, otimização e acompanhamento mensal.",
+    includes: [
+      "Meta Ads",
+      "Segmentação de público",
+      "Remarketing",
+      "Otimização contínua",
+      "Relatórios mensais",
+    ],
+  },
+  {
+    title: "Landing Page",
+    price: "R$ 1.500",
+    description:
+      "Para campanhas, diagnósticos, lançamentos simples ou ofertas específicas com foco em conversão.",
+    includes: [
+      "Página responsiva",
+      "Copy orientada à conversão",
+      "Formulário ou CTA",
+      "SEO básico",
+      "Publicação orientada",
+    ],
+  },
+  {
+    title: "Site Institucional",
+    price: "R$ 3.500",
+    description:
+      "Para apresentar a empresa, serviços e canais de contato com uma presença digital mais completa.",
+    includes: [
+      "Estrutura institucional",
+      "Páginas principais",
+      "Design responsivo",
+      "Formulários inteligentes",
+      "SEO básico",
+    ],
+  },
+  {
+    title: "CRM e Automação",
+    price: "CRM: R$ 2.500",
+    note: "Automações a partir de R$ 900",
+    description:
+      "Para organizar contatos, atendimento, follow-up e integrações de forma mais simples e operacional.",
+    includes: [
+      "Implantação de CRM",
+      "Fluxos automatizados",
+      "Integração com WhatsApp",
+      "Integração com Google",
+      "Dashboards simples",
+      "Automações em n8n",
+    ],
+  },
+  {
+    title: "Produção Audiovisual",
+    price: "Reels a partir de R$ 250/unidade",
+    description:
+      "Para criar conteúdos visuais pontuais para campanhas, redes sociais, eventos ou posicionamento de marca.",
+    includes: [
+      "Reels",
+      "Vídeos institucionais",
+      "Conteúdo para campanhas",
+      "Cobertura de eventos",
+      "Fotografia comercial",
+    ],
   },
 ];
 
@@ -607,6 +706,45 @@ function PlanCard({ plan }: { plan: (typeof plans)[number] }) {
   );
 }
 
+function OneOffServiceCard({
+  service,
+}: {
+  service: (typeof oneOffServices)[number];
+}) {
+  return (
+    <article className="flex h-full flex-col rounded-3xl border border-white/10 bg-zinc-950/52 p-6 shadow-2xl shadow-black/15 transition hover:-translate-y-1 hover:border-purple-300/45 hover:bg-white/[0.065]">
+      <div className="mb-5 h-1.5 w-20 rounded-full bg-gradient-to-r from-orange-400 to-purple-400" />
+      <h3 className="text-2xl font-bold leading-tight text-white">{service.title}</h3>
+      <p className="mt-4 text-2xl font-black leading-tight text-orange-200">
+        {service.price}
+      </p>
+      {service.note ? (
+        <p className="mt-2 w-fit rounded-full border border-purple-300/25 bg-purple-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-purple-100">
+          {service.note}
+        </p>
+      ) : null}
+      <p className="mt-5 leading-7 text-zinc-300">{service.description}</p>
+      <ul className="mt-6 flex-1 space-y-3">
+        {service.includes.map((item) => (
+          <li key={item} className="flex gap-3 text-sm leading-6 text-zinc-200">
+            <CheckIcon />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <a
+        href={tallyUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/8 px-5 py-3 text-sm font-bold text-white transition hover:border-orange-300/60 hover:bg-orange-400/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-200"
+      >
+        Solicitar proposta avulsa
+        <ArrowIcon />
+      </a>
+    </article>
+  );
+}
+
 function FaqItem({ faq }: { faq: (typeof faqs)[number] }) {
   const [open, setOpen] = useState(false);
   const id = faq.question.toLowerCase().replace(/\W+/g, "-");
@@ -845,6 +983,26 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="avulsos" className="border-y border-white/10 bg-white/[0.035] px-4 py-18 sm:px-5 md:px-8 md:py-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionIntro
+              label="Trabalhos avulsos"
+              title="Precisa resolver uma parte específica da operação?"
+              text="Além dos planos mensais, a Solo Povoado também pode atuar em entregas pontuais. Os valores abaixo ajudam a entender o investimento inicial antes do diagnóstico."
+            />
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {oneOffServices.map((service) => (
+                <OneOffServiceCard key={service.title} service={service} />
+              ))}
+            </div>
+            <div className="mt-8 rounded-3xl border border-orange-300/20 bg-orange-400/10 p-5 text-center">
+              <p className="mx-auto max-w-3xl text-sm leading-6 text-orange-50 md:text-base">
+                Valores podem variar conforme escopo, urgência, volume de materiais, integrações e necessidades do projeto.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section id="planos" className="relative border-y border-white/10 bg-zinc-950/55 px-4 py-18 sm:px-5 md:px-8 md:py-24">
           <div className="absolute inset-x-0 top-0 -z-10 mx-auto h-96 max-w-6xl bg-orange-500/10 blur-3xl" />
           <div className="mx-auto max-w-7xl">
@@ -971,6 +1129,9 @@ export default function Home() {
                 Instagram a definir
               </span>
             )}
+            <a className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-zinc-200 transition hover:border-orange-300/45 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-200" href="#avulsos">
+              Trabalhos avulsos
+            </a>
             <span className="rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-semibold text-zinc-500">
               Política de privacidade a definir
             </span>

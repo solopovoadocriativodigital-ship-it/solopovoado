@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "^15.3.4",
@@ -14,10 +15,16 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
+    "@next/eslint-plugin-next": "^15.5.19",
     "@tailwindcss/postcss": "^4.1.10",
     "@types/node": "^22.15.32",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.19",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "tailwindcss": "^4.1.10",
     "typescript": "^5.8.3"
   }
